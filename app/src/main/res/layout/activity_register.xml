@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+
+              android:backgroundTintMode="src_over"
+              android:gravity="center_horizontal"
+              android:orientation="vertical"
+              tools:context=".RegisterAct">
+    <Button
+            android:text="Login Page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/login_nav"/>
+
+    <ImageView
+            android:layout_width="92dp"
+            android:layout_height="63dp"
+            android:layout_marginTop="50dp"
+            app:srcCompat="@mipmap/register" />
+
+    <EditText
+            android:id="@+id/unid_Reg"
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="30dp"
+
+
+            android:hint="NIC"
+            android:textColor="#FB8C00"
+            android:textColorHint="#00897B" />
+
+    <EditText
+            android:id="@+id/email_Reg"
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+
+            android:ems="10"
+            android:hint="email"
+            android:inputType="textEmailAddress"
+            android:textColorHint="#00897B" />
+    <EditText
+            android:id="@+id/address_Reg"
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+
+            android:ems="10"
+            android:hint="Address"
+            android:inputType="text"
+            android:textColorHint="#00897B" />
+
+    <EditText
+            android:id="@+id/pw_Reg"
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@mipmap/password"
+            android:hint="password"
+            android:textColorHint="#00897B" />
+
+    <EditText
+            android:id="@+id/cpw_Reg"
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+
+            android:hint="cpassword"
+            android:textColorHint="#00897B" />
+
+    <Button
+            android:id="@+id/reg_Reg"
+            android:layout_width="142dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:background="#82B1FF"
+            android:text="Register"/>
+
+
+
+</LinearLayout>
