@@ -4,6 +4,9 @@ package com.example.ticket;
 import android.location.Address;
 import android.location.Geocoder;
 import android.util.Log;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,10 +32,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -45,19 +53,27 @@ public class GetLocation extends AppCompatActivity {
     String location123;
     DatabaseReference dbRef;
     Locations location_adding;
-
+    double[] arr;
+    ListView list1;
+    ArrayList<String> arrayList;
+    DatabaseReference reff;
+    long maxid=0;
+    long maxid1=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_location);
-
+        list1= findViewById(R.id.list);
         location_adding =new Locations();
 
-        mainmenu = findViewById(R.id.button1);
+        mainmenu = findViewById(R.id.button);
         cl = findViewById(R.id.button1);
         ADDLOC = findViewById(R.id.button7);
         ADDLOC.setVisibility(View.GONE);
+
+        display();
+
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.google_map);
 
@@ -68,6 +84,20 @@ public class GetLocation extends AppCompatActivity {
         } else {
             ActivityCompat.requestPermissions(GetLocation.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
         }
+
+
+
+
+        for(String x:arrayList){
+            Toast.makeText(getApplicationContext(), "craz22222222222y"+x, Toast.LENGTH_LONG).show();
+        }
+       // arrayList = display();
+        /*arrayList.add("aaa");
+        arrayList.add("bbb");*/
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, arrayList);
+        list1.setAdapter(arrayAdapter);
+
+
     }
 
     @Override
@@ -95,15 +125,10 @@ public class GetLocation extends AppCompatActivity {
     }
 
     private void getCurrentLocation() {
-        final double[] arr = new double[2];
+          arr = new double[2];
+        //Toast.makeText(getApplicationContext(), "crazy", Toast.LENGTH_LONG).show();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+
             return;
         }
         Task<Location> task = client.getLastLocation();
@@ -111,10 +136,12 @@ public class GetLocation extends AppCompatActivity {
             @Override
             public void onSuccess(final Location location) {
                 if(location != null){
+                    //Toast.makeText(getApplicationContext(), "crazy1", Toast.LENGTH_LONG).show();
                     supportMapFragment.getMapAsync(new OnMapReadyCallback() {
                         @Override
                         public void onMapReady(GoogleMap googleMap) {
                             LatLng latLng=new LatLng(location.getLatitude(),location.getLongitude());
+                            //Toast.makeText(getApplicationContext(), "crazy2", Toast.LENGTH_LONG).show();
                             arr[0]=location.getLatitude();
                             arr[1]=location.getLongitude();
                             //Toast.makeText(getApplicationContext(), "Address inside "+arr[0]+"****"+arr[1], Toast.LENGTH_LONG).show();
@@ -128,27 +155,37 @@ public class GetLocation extends AppCompatActivity {
                             location123=add;
                             ADDLOC.setVisibility(View.VISIBLE);
 
+                            reff=FirebaseDatabase.getInstance().getReference("locations");
+                            reff.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if(snapshot.exists()){
+                                        maxid=(snapshot.getChildrenCount());
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
                             ADDLOC.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
                                     dbRef= FirebaseDatabase.getInstance().getReference().child("locations");
                                     FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                    //DatabaseReference myRef = database.getReference("message");
 
                                     location_adding.setLocation(add);
-                                    dbRef.child("checking").setValue(location_adding);
-                                    Toast.makeText(getApplicationContext(), "Successfully Added the location", Toast.LENGTH_LONG).show();
+                                    dbRef.child(String.valueOf(maxid+1)).setValue(location_adding);
+                                    Toast.makeText(getApplicationContext(), "Successfully Added the location"+add, Toast.LENGTH_LONG).show();
                                     ADDLOC.setVisibility(View.GONE);
 
                                 }
                             });
 
 
-                            //ADDLOC.setVisibility(View.GONE);
-                            /*Location temp = new Location(LocationManager.GPS_PROVIDER);
-                            temp.setLatitude(location.getLatitude());
-                            temp.setLongitude(location.getLongitude());
-                            float distance = location.distanceTo(temp);*/
+
                         }
                     });
                 }
@@ -168,16 +205,17 @@ public class GetLocation extends AppCompatActivity {
     }
 
     private String getAddress(double latitude, double longitude) {
+        //Toast.makeText(getApplicationContext(), "crazy3", Toast.LENGTH_LONG).show();
         StringBuilder result = new StringBuilder();
         try {
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
             List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
             if (addresses.size() > 0) {
                 Address address = addresses.get(0);
-                result.append(address.getPostalCode()).append("\n");
-                result.append(address.getFeatureName()).append("\n");
-                result.append(address.getLocality()).append("\n");
-                result.append(address.getAdminArea()).append("\n");
+                result.append(address.getPostalCode());
+                result.append(address.getFeatureName());
+                result.append(address.getLocality());
+                result.append(address.getAdminArea());
                 result.append(address.getCountryName());
             }
         } catch (IOException e) {
@@ -186,4 +224,59 @@ public class GetLocation extends AppCompatActivity {
 
         return result.toString();
     }
+
+    private void display(){
+        arrayList = new ArrayList<>();
+       // arrayList.removeAll(arrayList);
+       // getCount();
+
+        DatabaseReference getDetails = FirebaseDatabase.getInstance().getReference().child("locations");
+
+        getDetails.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                long y=0;
+                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                    y++;
+
+                        //String loc = (String) dsp.child(String.valueOf(y)).child("location").getValue();
+                        String loc = (String) dsp.child("location").getValue();
+                        //Toast.makeText(getApplicationContext(), "crazyyyyyyyyyyyyyyy"+y+loc, Toast.LENGTH_LONG).show();
+                        arrayList.add(loc);
+
+
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+       // return arrayList;
+    }
+   /* public long getCount(){
+
+        reff=FirebaseDatabase.getInstance().getReference("locations");
+        reff.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    maxid1=(snapshot.getChildrenCount());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }*/
 }

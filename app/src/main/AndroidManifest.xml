@@ -1,47 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.ticket">
-
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-
-    <uses-feature android:name="android.hardware.camera"/>
-
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION"/>
-
-
-    <uses-permission android:name="android.permission.INTERNET"/>
+    package="com.example.ticket">
 
     <application
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-        <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB37df5vJlCuAIJ_VtyyX34MIQMyGuiEAw"/>
-        <activity android:name=".GetLocation">
-        </activity>
-        <activity android:name=".Dashboard">
-        </activity>
-        <activity android:name=".RegisterAct">
-        </activity>
-        <activity android:name=".GuestAccount">
-        </activity>
-        <activity android:name=".Ticketing">
-        </activity>
-        <activity android:name=".Login">
-        </activity>
+        android:allowBackup="true"
+        android:icon="@mipmap/lg"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Issue"></activity>
+        <activity android:name=".TicketPurchaseActivity" />
+        <activity android:name=".Payment" />
+        <activity android:name=".ActivatePackage" />
+        <activity android:name=".AddRoutes" />
+        <activity android:name=".GetLocation" />
+        <activity android:name=".Dashboard" />
+        <activity android:name=".RegisterAct" />
+        <activity android:name=".GuestAccount" />
+        <activity android:name=".Ticketing" />
+        <activity android:name=".Login" />
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyB37df5vJlCuAIJ_VtyyX34MIQMyGuiEAw" />
     </application>
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>

@@ -104,8 +104,6 @@ public class RegisterAct extends AppCompatActivity {
                                     us.setActivatedcredits(0);
                                     dbRef.child(username).setValue(us);
 
-
-
                                     Intent i = new Intent(RegisterAct.this, Dashboard.class);
 
 

@@ -80,4 +80,21 @@
             android:text="Go"
             android:textColor="#ffffff"/>
 
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="383dp"
+        android:layout_height="136dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="375dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="92dp"
+        android:gravity="center_horizontal"
+        android:textAlignment="center" />
+
+
 </RelativeLayout>
