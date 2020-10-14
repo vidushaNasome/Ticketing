@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Issue"></activity>
+        <activity android:name=".GuestCheckout"></activity>
+        <activity android:name=".GuestTicketActivity" />
+        <activity android:name=".GuestPurchaseTicket" />
+        <activity android:name=".GuestPayment" />
+        <activity android:name=".Issue" />
         <activity android:name=".TicketPurchaseActivity" />
         <activity android:name=".Payment" />
         <activity android:name=".ActivatePackage" />
