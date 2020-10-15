@@ -94,7 +94,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         guestacc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,GuestAccount.class );
+                Intent i = new Intent(MainActivity.this,GuestAccount
+                        .class );
                 startActivity(i);
             }
         });

@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".Issue" />
+        <activity android:name=".GuestCheckout"></activity>
+        <activity android:name=".GuestTicketActivity" />
+        <activity android:name=".GuestPurchaseTicket" />
+        <activity android:name=".GuestPayment" />
         <activity android:name=".TicketPurchaseActivity" />
         <activity android:name=".Payment" />
         <activity android:name=".ActivatePackage" />
@@ -21,7 +24,7 @@
         <activity android:name=".GuestAccount" />
         <activity android:name=".Ticketing" />
         <activity android:name=".Login" />
-        <activity android:name=".StartActivity">
+        <activity android:name=".Issue">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,11 +38,11 @@
     </application>
 
     <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>
