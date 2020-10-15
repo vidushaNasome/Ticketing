@@ -25,7 +25,7 @@ import javax.mail.internet.MimeMessage;
 
 public class GuestTicketActivity extends AppCompatActivity {
     TextToSpeech t1;
-    Button btnClick,btnc;
+    Button btnClick;
     String data12;
     String data;
     String uemail;
@@ -36,7 +36,6 @@ public class GuestTicketActivity extends AppCompatActivity {
         setContentView(R.layout.activity_guest_ticket);
 
         btnClick=findViewById(R.id.email_txt);
-        btnc=findViewById(R.id.btncheck);
 
         Intent i=getIntent();
         String data=i.getStringExtra("data");
@@ -91,7 +90,7 @@ public class GuestTicketActivity extends AppCompatActivity {
                 try {
                     String xcon="You have successfully Purchase a ticket. Your Ticket details are shown below.\n"+uname+data12;
                     sendmail(uemail, xcon);
-                    Intent i = new Intent(GuestTicketActivity.this, MainActivity.class);
+                    Intent i = new Intent(GuestTicketActivity.this, BuyTicket.class);
 
                     startActivity(i);
 
@@ -104,13 +103,6 @@ public class GuestTicketActivity extends AppCompatActivity {
             }
         });
 
-        btnc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent cc=new Intent(GuestTicketActivity.this,GuestCheckout.class);
-                startActivity(cc);
-            }
-        });
     }
 
     public void onPause(){

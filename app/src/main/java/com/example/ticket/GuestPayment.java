@@ -35,6 +35,7 @@ public class GuestPayment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_payment);
+        getSupportActionBar().setTitle("Confirm Purchase");
 
         Intent i=getIntent();
         String data=i.getStringExtra("details");

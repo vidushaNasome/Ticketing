@@ -26,6 +26,7 @@ public class GuestCheckout extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_checkout);
+        getSupportActionBar().setTitle("Credit Card Payment");
 
         cardForm=findViewById(R.id.card_form);
         buy=findViewById(R.id.btnBuy);

@@ -34,6 +34,7 @@ public class GuestPurchaseTicket extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_purchase_ticket);
+        getSupportActionBar().setTitle("Purchase Details");
 
         Intent i = getIntent();
         String data = i.getStringExtra("userName");

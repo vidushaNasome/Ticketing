@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg2"
-    tools:context=".GuestTicketActivity">
+    tools:context=".BuyTicket">
 
     <Button
-        android:id="@+id/email_txt"
+        android:id="@+id/btncheck"
         android:layout_width="320dp"
         android:layout_height="221dp"
-        android:background="#A7C7FF"
-        android:text="Issue Ticket and Send me Email."
+        android:text="Buy Now"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
