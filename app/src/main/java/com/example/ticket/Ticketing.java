@@ -138,8 +138,9 @@ public class Ticketing extends AppCompatActivity {
                 for (RouteFair xx : arrayList) {
                     //Toast.makeText(Ticketing.this, "inside he he he", Toast.LENGTH_SHORT).show();
                    // arrayListnew.add("Route ID: " + xx.getRouteId() + "\n Route: " + xx.getRoute() + "\n Fair:-" + xx.getFair());
-
-                    arrayListnew.add(xx.getRoute()+"@Route ID: " + xx.getRouteId() + " "  + "\n Fair:-" + xx.getFair());
+                    try {
+                        arrayListnew.add(xx.getRoute() + "@Route ID: " + xx.getRouteId() + " " + "\n Fair:-" + xx.getFair());
+                    }catch (Exception e){}
                 }
 
                 displayMethod();

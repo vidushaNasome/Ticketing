@@ -53,7 +53,7 @@ public class Login extends AppCompatActivity {
         main_nav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Login.this, MainActivity.class);
+                Intent i = new Intent(Login.this, StartActivity.class);
                 startActivity(i);
             }
         });
