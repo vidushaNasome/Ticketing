@@ -17,6 +17,7 @@
         <activity android:name=".TicketPurchaseActivity" />
         <activity android:name=".Payment" />
         <activity android:name=".ActivatePackage" />
+        <activity android:name=".Issue" />
         <activity android:name=".AddRoutes" />
         <activity android:name=".GetLocation" />
         <activity android:name=".Dashboard" />
@@ -24,7 +25,7 @@
         <activity android:name=".GuestAccount" />
         <activity android:name=".Ticketing" />
         <activity android:name=".Login" />
-        <activity android:name=".Issue">
+        <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
