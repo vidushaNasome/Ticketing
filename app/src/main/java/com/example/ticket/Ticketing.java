@@ -115,21 +115,23 @@ public class Ticketing extends AppCompatActivity {
     private void display() {
         arrayList = new ArrayList<>();
         Toast.makeText(Ticketing.this, "Updating Content.......................", Toast.LENGTH_SHORT).show();
-        try {
+
             DatabaseReference getDetails = FirebaseDatabase.getInstance().getReference().child("RouteFair");
 
             getDetails.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    long y = 0;
+                    //long y = 0;
                     for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                        y++;
-
+                       // y++;
+                        try{
                         RouteFair loc = dsp.child("RouteFair").getValue(RouteFair.class);
                         //String xx= (String) dsp.child(String.valueOf(y)).child("RouteFair").child("Start").getValue();
                         //Toast.makeText(Ticketing.this,"rrrrrrrrr"+y+"****"+loc.getRoute(),Toast.LENGTH_SHORT).show();
-                        arrayList.add(loc);
-                        int y1 = arrayList.size();
+
+                            arrayList.add(loc);
+                        }catch (Exception e){}
+                        //int y1 = arrayList.size();
                         //Toast.makeText(Ticketing.this, "helloooooooooo" + y1, Toast.LENGTH_SHORT).show();
 
                     }
@@ -139,8 +141,11 @@ public class Ticketing extends AppCompatActivity {
                     for (RouteFair xx : arrayList) {
                         //Toast.makeText(Ticketing.this, "inside he he he", Toast.LENGTH_SHORT).show();
                         // arrayListnew.add("Route ID: " + xx.getRouteId() + "\n Route: " + xx.getRoute() + "\n Fair:-" + xx.getFair());
+                        try {
+                            arrayListnew.add(xx.getRoute() + "@Route ID: " + xx.getRouteId() + " " + "\n Fair:!" + xx.getFair());
+                        }catch (Exception e){
 
-                        arrayListnew.add(xx.getRoute() + "@Route ID: " + xx.getRouteId() + " " + "\n Fair:-" + xx.getFair());
+                        }
 
                     }
 
@@ -154,10 +159,6 @@ public class Ticketing extends AppCompatActivity {
 
                 }
             });
-
-        }catch (Exception e){
-
-        }
 
     }
 

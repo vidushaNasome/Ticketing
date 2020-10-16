@@ -43,7 +43,7 @@ public class TicketPurchaseActivity extends AppCompatActivity {
         name = i.getStringExtra("un");
 
         //String string = "004-034556";
-        String[] parts = data.split("-");
+        String[] parts = data.split("!");
         String part1 = parts[0];
         String part2 = parts[1];
         tp=findViewById(R.id.ticketpt);
@@ -57,7 +57,9 @@ public class TicketPurchaseActivity extends AppCompatActivity {
         tp.setText(data);
         pp.setText(part2);
         nn.setText(name);
-        price=Float.parseFloat(part2);
+        try {
+            price = Float.parseFloat(part2);
+        }catch (Exception e){}
         val=price;
         Toast.makeText(TicketPurchaseActivity.this, "Selected Price"+price, Toast.LENGTH_SHORT).show();
 
