@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ticket.Model.EmailValidator;
 import com.example.ticket.Model.Guest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,6 +38,7 @@ public class GuestAccount extends AppCompatActivity {
     Button login;
     DatabaseReference dbRef;
     Guest guest;
+    private EmailValidator mEmailValidator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,8 @@ public class GuestAccount extends AppCompatActivity {
         login=findViewById(R.id.btnLogin);
 
         guest=new Guest();
+        mEmailValidator = new EmailValidator();
+        email.addTextChangedListener(mEmailValidator);
 
     }
     @Override
@@ -64,8 +69,9 @@ public class GuestAccount extends AppCompatActivity {
 
                 if(guestName.isEmpty()||guestEmail.isEmpty())
                 Toast.makeText(getApplicationContext(), "Please Input Values For Empty Fields", Toast.LENGTH_LONG).show();
-                else if(!Patterns.EMAIL_ADDRESS.matcher(guestEmail).matches()){
-                    Toast.makeText(getApplicationContext(),"Invalid email Address", Toast.LENGTH_LONG).show();
+                else if(!mEmailValidator.isValid()){
+                    email.setError("Invalid email Address");
+                    Log.w("TAG", "Invalid email");
                 }
                 else{
 

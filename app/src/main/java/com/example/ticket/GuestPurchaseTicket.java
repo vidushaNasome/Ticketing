@@ -46,7 +46,7 @@ public class GuestPurchaseTicket extends AppCompatActivity {
         email = findViewById(R.id.emailid);
         list1_1= findViewById(R.id.list_route);
 
-        //Checking ID
+        //Checking Name
         try{
             DatabaseReference displayDf = FirebaseDatabase.getInstance().getReference().child("Guest").child(data);
             displayDf.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -83,49 +83,55 @@ public class GuestPurchaseTicket extends AppCompatActivity {
 
             });
         }catch(Exception e){}
+
         display();
     }
-
     private void display() {
         arrayList = new ArrayList<>();
         Toast.makeText(GuestPurchaseTicket.this, "Updating Content.......................", Toast.LENGTH_SHORT).show();
-        DatabaseReference getDetails = FirebaseDatabase.getInstance().getReference().child("RouteFair");
+        try {
+            DatabaseReference getDetails = FirebaseDatabase.getInstance().getReference().child("RouteFair");
 
-        getDetails.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                long y = 0;
-                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                    y++;
+            getDetails.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    long y = 0;
+                    for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                        y++;
 
-                    RouteFair loc = dsp.child("RouteFair").getValue(RouteFair.class);
-                    //String xx= (String) dsp.child(String.valueOf(y)).child("RouteFair").child("Start").getValue();
-                    //Toast.makeText(Ticketing.this,"rrrrrrrrr"+y+"****"+loc.getRoute(),Toast.LENGTH_SHORT).show();
-                    arrayList.add(loc);
-                    int y1 = arrayList.size();
-                    //Toast.makeText(Ticketing.this, "helloooooooooo" + y1, Toast.LENGTH_SHORT).show();
+                        RouteFair loc = dsp.child("RouteFair").getValue(RouteFair.class);
+                        //String xx= (String) dsp.child(String.valueOf(y)).child("RouteFair").child("Start").getValue();
+                        //Toast.makeText(Ticketing.this,"rrrrrrrrr"+y+"****"+loc.getRoute(),Toast.LENGTH_SHORT).show();
+                        arrayList.add(loc);
+                        int y1 = arrayList.size();
+                        //Toast.makeText(Ticketing.this, "helloooooooooo" + y1, Toast.LENGTH_SHORT).show();
+
+                    }
+                    arrayListnew = new ArrayList<>();
+                    //Toast.makeText(Ticketing.this, "Still Updating Content.................." + arrayList.size(), Toast.LENGTH_SHORT).show();
+
+                    for (RouteFair xx : arrayList) {
+                        //Toast.makeText(Ticketing.this, "inside he he he", Toast.LENGTH_SHORT).show();
+                        // arrayListnew.add("Route ID: " + xx.getRouteId() + "\n Route: " + xx.getRoute() + "\n Fair:-" + xx.getFair());
+
+                        arrayListnew.add(xx.getRoute() + "@Route ID: " + xx.getRouteId() + " " + "\n Fair:-" + xx.getFair());
+
+                    }
+
+                    displayMethod();
+
 
                 }
-                arrayListnew = new ArrayList<>();
-                //Toast.makeText(Ticketing.this, "Still Updating Content.................." + arrayList.size(), Toast.LENGTH_SHORT).show();
 
-                for (RouteFair xx : arrayList) {
-                    //Toast.makeText(Ticketing.this, "inside he he he", Toast.LENGTH_SHORT).show();
-                    // arrayListnew.add("Route ID: " + xx.getRouteId() + "\n Route: " + xx.getRoute() + "\n Fair:-" + xx.getFair());
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    arrayListnew.add(xx.getRoute()+"@Route ID: " + xx.getRouteId() + " "  + "\n Fair:-" + xx.getFair());
                 }
+            });
 
-                displayMethod();
+        }catch (Exception e){
 
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        }
 
     }
 
@@ -145,5 +151,6 @@ public class GuestPurchaseTicket extends AppCompatActivity {
 
             }
         });
+
     }
 }
