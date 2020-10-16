@@ -50,12 +50,15 @@ public class ExampleInstrumentedTest {
         protected Intent getActivityIntent() {
             Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
             Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.putExtra("details", "hhhhhhhhh-90");
+            intent.putExtra("details", "hhhhhhhhh!90");
             intent.putExtra("un", "998353719V");
             return intent;
         }
     };
 
+
+    @Rule
+    public final ActivityTestRule<RegisterAct> rule4 = new ActivityTestRule<>(RegisterAct.class, true);
 
     @Test
     public void useAppContext() {
@@ -76,6 +79,30 @@ public class ExampleInstrumentedTest {
 
         View viewById2 = activity.findViewById(R.id.busname);
         assertThat(viewById2,notNullValue());
+
+        //View viewById3 = activity.findViewById(R.id.bussubmit);
+
+
+
+    }
+    //register Activity
+    @Test
+    public void validateFieldsRegisterActivity(){
+        StartActivity activity = rule.getActivity();
+        View viewById1 = activity.findViewById(R.id.unid_Reg);
+        assertThat(viewById1,notNullValue());
+
+        View viewById2 = activity.findViewById(R.id.pw_Reg);
+        assertThat(viewById2,notNullValue());
+
+        View viewById3 = activity.findViewById(R.id.email_Reg);
+        assertThat(viewById3,notNullValue());
+
+        View viewById4 = activity.findViewById(R.id.address_Reg);
+        assertThat(viewById4,notNullValue());
+
+        View viewById5 = activity.findViewById(R.id.cpw_Reg);
+        assertThat(viewById5,notNullValue());
 
         //View viewById3 = activity.findViewById(R.id.bussubmit);
 
