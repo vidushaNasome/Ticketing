@@ -23,25 +23,30 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class GuestPurchaseTicket extends AppCompatActivity {
-    String name;
     TextView username,email;
     String name1,email1;
     String check;
     ListView list1_1;
     ArrayList<RouteFair> arrayList;
     ArrayList<String> arrayListnew;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_purchase_ticket);
+        //Action bar title
         getSupportActionBar().setTitle("Purchase Details");
 
         Intent i = getIntent();
         String data = i.getStringExtra("userName");
         check="hi";
+
         final MediaPlayer mp=MediaPlayer.create(this,R.raw.processing_3);
         mp.start();
+
         Toast.makeText(GuestPurchaseTicket.this,data,Toast.LENGTH_SHORT).show();
+
+        //id
         username = (TextView) findViewById(R.id.uname);
         email = findViewById(R.id.emailid);
         list1_1= findViewById(R.id.list_route);
@@ -52,7 +57,6 @@ public class GuestPurchaseTicket extends AppCompatActivity {
             displayDf.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                     if (dataSnapshot.hasChildren()) {
 
                         name1 = dataSnapshot.child("username").getValue().toString();
@@ -65,9 +69,6 @@ public class GuestPurchaseTicket extends AppCompatActivity {
                             Intent in = new Intent(GuestPurchaseTicket.this, GuestAccount.class);
                             startActivity(in);
                         }
-
-
-
                     }else{
 
                         Toast.makeText(GuestPurchaseTicket.this,"You don't have an Account.Please Create an Account and Try Again.",Toast.LENGTH_SHORT).show();
@@ -89,52 +90,42 @@ public class GuestPurchaseTicket extends AppCompatActivity {
     private void display() {
         arrayList = new ArrayList<>();
         Toast.makeText(GuestPurchaseTicket.this, "Updating Content.......................", Toast.LENGTH_SHORT).show();
-        try {
-            DatabaseReference getDetails = FirebaseDatabase.getInstance().getReference().child("RouteFair");
 
-            getDetails.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    long y = 0;
-                    for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                        y++;
+        DatabaseReference getDetails = FirebaseDatabase.getInstance().getReference().child("RouteFair");
 
+        getDetails.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                    try{
                         RouteFair loc = dsp.child("RouteFair").getValue(RouteFair.class);
-                        //String xx= (String) dsp.child(String.valueOf(y)).child("RouteFair").child("Start").getValue();
-                        //Toast.makeText(Ticketing.this,"rrrrrrrrr"+y+"****"+loc.getRoute(),Toast.LENGTH_SHORT).show();
                         arrayList.add(loc);
-                        int y1 = arrayList.size();
-                        //Toast.makeText(Ticketing.this, "helloooooooooo" + y1, Toast.LENGTH_SHORT).show();
+                    }catch (Exception e){}
+                }
+                arrayListnew = new ArrayList<>();
+                //Toast.makeText(Ticketing.this, "Still Updating Content.................." + arrayList.size(), Toast.LENGTH_SHORT).show();
 
-                    }
-                    arrayListnew = new ArrayList<>();
-                    //Toast.makeText(Ticketing.this, "Still Updating Content.................." + arrayList.size(), Toast.LENGTH_SHORT).show();
-
-                    for (RouteFair xx : arrayList) {
-                        //Toast.makeText(Ticketing.this, "inside he he he", Toast.LENGTH_SHORT).show();
-                        // arrayListnew.add("Route ID: " + xx.getRouteId() + "\n Route: " + xx.getRoute() + "\n Fair:-" + xx.getFair());
-
-                        arrayListnew.add(xx.getRoute() + "@Route ID: " + xx.getRouteId() + " " + "\n Fair:-" + xx.getFair());
+                for (RouteFair xx : arrayList) {
+                    try {
+                        arrayListnew.add(xx.getRoute() + "@Route ID: " + xx.getRouteId() + " " + "\n Fair:!" + xx.getFair());
+                    }catch (Exception e){
 
                     }
 
-                    displayMethod();
-
-
                 }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+                displayMethod();
 
-                }
-            });
+            }
 
-        }catch (Exception e){
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-        }
+            }
+        });
 
     }
-
+    //display details in list view
     private void displayMethod(){
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayListnew);
 

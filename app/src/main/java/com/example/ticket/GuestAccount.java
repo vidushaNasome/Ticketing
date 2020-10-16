@@ -9,16 +9,14 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ticket.Model.EmailValidator;
+import com.example.ticket.Test.EmailValidator;
 import com.example.ticket.Model.Guest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,10 +37,12 @@ public class GuestAccount extends AppCompatActivity {
     DatabaseReference dbRef;
     Guest guest;
     private EmailValidator mEmailValidator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_account);
+        //Action bar title
         getSupportActionBar().setTitle("Guest Login");
 
         isOnline();
@@ -120,9 +120,6 @@ public class GuestAccount extends AppCompatActivity {
 
                             }
                         });
-
-
-
                     }
                 }
                 }

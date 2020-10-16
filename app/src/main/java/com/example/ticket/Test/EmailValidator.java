@@ -1,4 +1,4 @@
-package com.example.ticket.Model;
+package com.example.ticket.Test;
 import android.app.Activity;
 import android.text.Editable;
 import android.text.TextWatcher;

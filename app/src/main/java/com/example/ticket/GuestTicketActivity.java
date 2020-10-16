@@ -25,17 +25,17 @@ import javax.mail.internet.MimeMessage;
 
 public class GuestTicketActivity extends AppCompatActivity {
     TextToSpeech t1;
-    Button btnClick;
-    String data12;
-    String data;
-    String uemail;
-    String uname;
+    Button btn;
+    String data123;
+    String email;
+    String name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_ticket);
 
-        btnClick=findViewById(R.id.email_txt);
+        btn=findViewById(R.id.email_txt);
 
         Intent i=getIntent();
         String data=i.getStringExtra("data");
@@ -44,12 +44,12 @@ public class GuestTicketActivity extends AppCompatActivity {
         String part1 = parts[0];
         String part2 = parts[1];
 
-        data12=part1;
+        data123=part1;
 
-        data12 =data12.replace(",", "");
+        data123 =data123.replace(",", "");
 
-        uemail=i.getStringExtra("email");
-        uname=i.getStringExtra("name");
+        email=i.getStringExtra("email");
+        name=i.getStringExtra("name");
 
         //Email and Voice recognition
 
@@ -62,15 +62,12 @@ public class GuestTicketActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
-
     @Override
     protected void onResume() {
         super.onResume();
 
-        btnClick.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -78,7 +75,7 @@ public class GuestTicketActivity extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
 
-                    t1.speak("You have Successfully Purchase the ticket "+data12 + "Enjoy your Trip",TextToSpeech.QUEUE_FLUSH,null,null);
+                    t1.speak("You have Successfully Purchase the ticket "+data123 + "Enjoy your Trip",TextToSpeech.QUEUE_FLUSH,null,null);
 
 
                 } else {
@@ -88,8 +85,8 @@ public class GuestTicketActivity extends AppCompatActivity {
                 //Email
 
                 try {
-                    String xcon="You have successfully Purchase a ticket. Your Ticket details are shown below.\n"+uname+data12;
-                    sendmail(uemail, xcon);
+                    String xcon="You have successfully Purchase a ticket. Your Ticket details are shown below.\n"+name+data123;
+                    sendmail(email, xcon);
                     Intent i = new Intent(GuestTicketActivity.this, BuyTicket.class);
 
                     startActivity(i);
@@ -102,7 +99,6 @@ public class GuestTicketActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     public void onPause(){
@@ -143,6 +139,6 @@ public class GuestTicketActivity extends AppCompatActivity {
         msg.setContent(xcon,"text/html");
         msg.setSentDate(new Date());
         Transport.send(msg);
-
     }
+
 }

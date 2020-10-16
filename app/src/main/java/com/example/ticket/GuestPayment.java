@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class GuestPayment extends AppCompatActivity {
-    TextView ticketPrice,purchasePrice,nn;
+    TextView tp,pp,nn;
     float price;
     String name;
     Button purchase;
@@ -31,10 +31,12 @@ public class GuestPayment extends AppCompatActivity {
     String datadet;
     DatabaseReference dbRef,reff;
     long maxid=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_payment);
+        //Action bar title
         getSupportActionBar().setTitle("Confirm Purchase");
 
         Intent i=getIntent();
@@ -42,22 +44,21 @@ public class GuestPayment extends AppCompatActivity {
         datadet=data;
         name = i.getStringExtra("un");
 
-        //String string = "004-034556";
-        String[] parts = data.split("-");
+        String[] parts = data.split("!");
         String part1 = parts[0];
         String part2 = parts[1];
-        ticketPrice=findViewById(R.id.ticketpt);
-        purchasePrice=findViewById(R.id.pricept);
+        tp=findViewById(R.id.ticketpt);
+        pp=findViewById(R.id.pricept);
         nn=findViewById(R.id.namett);
         purchase=findViewById(R.id.purchaseTicket);
 
-        // session = new Session(getApplicationContext());
-
         guest=new Guest();
-        ticketPrice.setText(data);
-        purchasePrice.setText(part2);
+        tp.setText(data);
+        pp.setText(part2);
         nn.setText(name);
-        price=Float.parseFloat(part2);
+        try {
+            price = Float.parseFloat(part2);
+        }catch (Exception e){}
         val=price;
         Toast.makeText(GuestPayment.this, "Selected Price"+price, Toast.LENGTH_SHORT).show();
     }
@@ -65,6 +66,7 @@ public class GuestPayment extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         purchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,20 +84,11 @@ public class GuestPayment extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     float tot=val;
-                                    /*Toast.makeText(getApplicationContext(), "Available Credits"+tot, Toast.LENGTH_LONG).show();
-                                    if(tot<=0){
-                                        Intent i = new Intent(GuestPayment.this, GuestAccount.class);
-                                        startActivity(i);
-                                        Toast.makeText(getApplicationContext(), "Insuffient Credits!", Toast.LENGTH_LONG).show();
-                                        return;
-                                    }*/
+
                                     guest.setEmail(email);
                                     guest.setUsername(name);
                                     guest.setActivatedcredits(tot);
                                     updateeml.child(name).setValue(guest);
-
-                                    //Toast.makeText(getApplicationContext(), "Successfully Purchase the Ticket!", Toast.LENGTH_LONG).show();
-                                    //adding bus
 
                                     reff=FirebaseDatabase.getInstance().getReference("PassengersRoutesDetails");
                                     reff.addValueEventListener(new ValueEventListener() {
@@ -127,27 +120,18 @@ public class GuestPayment extends AppCompatActivity {
                                     startActivity(i);
 
                                 }
-
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
                                 }
                             });
-
-
-
-
-
                         }
-
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
                 });
-
             }
         });
     }

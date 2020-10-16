@@ -1,7 +1,7 @@
 package com.example.ticket;
-import com.example.ticket.Model.EmailValidator;
+import com.example.ticket.Test.EmailValidator;
 import org.junit.Test;
-import org.junit.Assert.*;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 

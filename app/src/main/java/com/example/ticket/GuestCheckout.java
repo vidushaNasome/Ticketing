@@ -20,12 +20,12 @@ public class GuestCheckout extends AppCompatActivity {
     Button buy,exit;
     AlertDialog.Builder alertBuilder;
     CreditCard card;
-
     DatabaseReference dbRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_checkout);
+        //Action bar title
         getSupportActionBar().setTitle("Credit Card Payment");
 
         cardForm=findViewById(R.id.card_form);
@@ -34,6 +34,7 @@ public class GuestCheckout extends AppCompatActivity {
 
         card = new CreditCard();
 
+        //credit card validation
         cardForm.cardRequired(true)
                 .expirationRequired(true)
                 .cvvRequired(true)
@@ -79,7 +80,7 @@ public class GuestCheckout extends AppCompatActivity {
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(GuestCheckout.this,MainActivity.class);
+                Intent i=new Intent(GuestCheckout.this,StartActivity.class);
                 startActivity(i);
             }
         });
