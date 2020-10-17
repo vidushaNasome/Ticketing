@@ -138,7 +138,7 @@ public class RegisterAct extends AppCompatActivity {
         });
     }
 
-    public boolean isOnline() {
+    public  boolean isOnline() {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
 
@@ -148,5 +148,6 @@ public class RegisterAct extends AppCompatActivity {
         }
         return true;
     }
+
 
 }

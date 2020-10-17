@@ -28,6 +28,13 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
 
+    //Testing for classes
+
+    //StartActivity
+    //Ticketing
+    //TicketPurchaseActivity
+    //RegisterAct
+
     @Rule
     public final ActivityTestRule<StartActivity> rule = new ActivityTestRule<>(StartActivity.class, true);
 
@@ -59,6 +66,7 @@ public class ExampleInstrumentedTest {
 
     @Rule
     public final ActivityTestRule<RegisterAct> rule4 = new ActivityTestRule<>(RegisterAct.class, true);
+
 
     @Test
     public void useAppContext() {

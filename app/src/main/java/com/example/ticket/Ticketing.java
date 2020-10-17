@@ -30,6 +30,7 @@ public class Ticketing extends AppCompatActivity {
     TextView username,email,credits;
     String credits1,name1,email1,password1;
     String check;
+    String check12;
     ListView list1_1;
     ArrayList<RouteFair> arrayList;
     ArrayList<String> arrayListnew;
@@ -49,6 +50,10 @@ public class Ticketing extends AppCompatActivity {
         email = findViewById(R.id.emailid);
         credits = findViewById(R.id.creditsId);
         list1_1= findViewById(R.id.list_route);
+
+        check12="VALIDATING";
+
+        checkValid("ccc");
 
         //Checking ID
         try{
@@ -178,6 +183,17 @@ public class Ticketing extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    public Boolean checkValid(String x){
+        if(x.equals("check")){
+            if(check12.equals("VALIDATING")){
+                return false;
+            }
+            else return true;
+        }
+        return true;
 
     }
 }
