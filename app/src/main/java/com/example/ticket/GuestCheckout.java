@@ -13,14 +13,19 @@ import android.widget.Toast;
 
 import com.braintreepayments.cardform.view.CardForm;
 import com.example.ticket.Model.CreditCard;
+import com.example.ticket.Test.GuestValidator;
 import com.google.firebase.database.DatabaseReference;
-
+//credit card payment
 public class GuestCheckout extends AppCompatActivity {
     CardForm cardForm;
     Button buy,exit;
     AlertDialog.Builder alertBuilder;
+    //Credit Card
     CreditCard card;
     DatabaseReference dbRef;
+
+    private GuestValidator guestValidator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +38,8 @@ public class GuestCheckout extends AppCompatActivity {
         exit=findViewById(R.id.btnExit);
 
         card = new CreditCard();
+
+        guestValidator=new GuestValidator();
 
         //credit card validation
         cardForm.cardRequired(true)
@@ -76,7 +83,7 @@ public class GuestCheckout extends AppCompatActivity {
 
             }
         });
-
+        //exit button
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

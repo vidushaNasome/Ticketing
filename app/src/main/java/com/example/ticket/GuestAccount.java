@@ -17,13 +17,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.ticket.Test.EmailValidator;
+import com.example.ticket.Test.GuestAccountValidator;
 import com.example.ticket.Model.Guest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
+//Guest login
 public class GuestAccount extends AppCompatActivity {
     private Session session;
 
@@ -32,10 +33,15 @@ public class GuestAccount extends AppCompatActivity {
 
     String guestName;
     String guestEmail;
+
     Boolean connection;
+
     Button login;
+
     DatabaseReference dbRef;
+
     Guest guest;
+
     private EmailValidator mEmailValidator;
 
     @Override
@@ -61,12 +67,14 @@ public class GuestAccount extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        //log in
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 guestName=username.getText().toString();
                 guestEmail=email.getText().toString();
 
+                //validate and test fields
                 if(guestName.isEmpty()||guestEmail.isEmpty())
                 Toast.makeText(getApplicationContext(), "Please Input Values For Empty Fields", Toast.LENGTH_LONG).show();
                 else if(!mEmailValidator.isValid()){
@@ -74,10 +82,10 @@ public class GuestAccount extends AppCompatActivity {
                     Log.w("TAG", "Invalid email");
                 }
                 else{
-
+                    //checking online
                     connection = isOnline();
                     if (connection == true) {
-
+                        //database
                         DatabaseReference logindf = FirebaseDatabase.getInstance().getReference().child("Guest").child(guestName);
 
                         logindf.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -92,7 +100,6 @@ public class GuestAccount extends AppCompatActivity {
                                     guest.setUsername(username.getText().toString().trim());
                                     guest.setEmail(email.getText().toString().trim());
                                     dbRef.child(guestName).setValue(guest);
-
 
 
                                     Intent i = new Intent(GuestAccount.this, GuestPurchaseTicket.class);
@@ -125,14 +132,15 @@ public class GuestAccount extends AppCompatActivity {
                 }
         });
     }
-        private Boolean isOnline() {
-            ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+    //check online
+    private Boolean isOnline() {
+        ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
 
             if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
                 Toast.makeText(getApplicationContext(), "No Internet connection!", Toast.LENGTH_LONG).show();
                 return false;
             }
-            return true;
-        }
+                return true;
+    }
 }

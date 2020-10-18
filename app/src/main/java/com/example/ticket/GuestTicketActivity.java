@@ -22,7 +22,7 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
+//issue ticket and send email
 public class GuestTicketActivity extends AppCompatActivity {
     TextToSpeech t1;
     Button btn;

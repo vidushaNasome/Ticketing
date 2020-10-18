@@ -18,18 +18,25 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
+//confirm purchase
 public class GuestPayment extends AppCompatActivity {
     TextView tp,pp,nn;
-    float price;
+
     String name;
+    String datadet;
+
     Button purchase;
+
     Guest guest;
+
+    float price;
     float val;
+
+    //database reference
     DatabaseReference checkdata;
     DatabaseReference updateeml;
-    String datadet;
     DatabaseReference dbRef,reff;
+
     long maxid=0;
 
     @Override
@@ -60,6 +67,7 @@ public class GuestPayment extends AppCompatActivity {
             price = Float.parseFloat(part2);
         }catch (Exception e){}
         val=price;
+        //calling singleton class
         Singleton singleton=com.example.ticket.Singleton.getInstance();
         singleton.setText(price);
         Toast.makeText(GuestPayment.this, "Selected Price"+singleton.getText(), Toast.LENGTH_SHORT).show();
@@ -68,7 +76,7 @@ public class GuestPayment extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        //confirm purchase
         purchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

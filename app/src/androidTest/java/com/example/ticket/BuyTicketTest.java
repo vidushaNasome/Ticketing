@@ -17,6 +17,9 @@ import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentat
 import static org.junit.Assert.assertNotNull;
 
 public class BuyTicketTest {
+    //Testing for Buy Ticket class
+
+    //BuyTicket Activity Declaring rules
     @Rule
     public ActivityTestRule<BuyTicket> mActivityTestRule=new ActivityTestRule<BuyTicket>(BuyTicket.class);
 
@@ -24,11 +27,13 @@ public class BuyTicketTest {
 
     Instrumentation.ActivityMonitor monitor=getInstrumentation().addMonitor(GuestCheckout.class.getName(),null,false);
 
+    //runs before test execution
     @Before
     public void setUp() throws Exception{
         mActivity=mActivityTestRule.getActivity();
     }
 
+    //checking functionalitys of BuyTicket class
     @Test
     public void testLaunchOfGuestCheckoutOnButtonClick()
     {
@@ -43,6 +48,8 @@ public class BuyTicketTest {
         secondActivity.finish();
     }
 
+    //checking any exceptions are thrown in the  test case or
+    //in the case of assertion failures
     @After
     public void tearDown() throws Exception{
         mActivity=null;

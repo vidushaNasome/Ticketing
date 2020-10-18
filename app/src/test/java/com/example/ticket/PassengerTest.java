@@ -1,6 +1,7 @@
 package com.example.ticket;
 
 import com.example.ticket.Test.EmailValidator;
+import com.example.ticket.Test.GuestAccountValidator;
 
 import org.junit.Test;
 

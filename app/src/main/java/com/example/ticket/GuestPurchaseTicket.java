@@ -21,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-
+//select journey information
 public class GuestPurchaseTicket extends AppCompatActivity {
     TextView username,email;
     String name1,email1;

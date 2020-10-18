@@ -5,9 +5,11 @@ public class Singleton {
     float editValue;
 
     private static final Singleton objInstance=new Singleton();
+
     public static Singleton getInstance(){
         return objInstance;
     }
+
     private Singleton(){}
 
     public void setText(float editValue){
