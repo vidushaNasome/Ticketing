@@ -60,7 +60,9 @@ public class GuestPayment extends AppCompatActivity {
             price = Float.parseFloat(part2);
         }catch (Exception e){}
         val=price;
-        Toast.makeText(GuestPayment.this, "Selected Price"+price, Toast.LENGTH_SHORT).show();
+        Singleton singleton=com.example.ticket.Singleton.getInstance();
+        singleton.setText(price);
+        Toast.makeText(GuestPayment.this, "Selected Price"+singleton.getText(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
