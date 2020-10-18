@@ -1,5 +1,6 @@
 package com.example.ticket;
 
+import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
 import android.renderscript.Sampler;
@@ -9,10 +10,14 @@ import android.widget.TextView;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
+
+import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,11 +48,12 @@ public class ExampleInstrumentedTest {
     @Rule
     public ActivityTestRule<Ticketing> rule2  = new  ActivityTestRule<Ticketing>(Ticketing.class)
     {
+
         @Override
         protected Intent getActivityIntent() {
             Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.putExtra("id", "998353719V");
+            Intent intent = new Intent(appContext,Ticketing.class);
+            intent.putExtra("id", "785634432v");
             return intent;
         }
     };
@@ -59,9 +65,9 @@ public class ExampleInstrumentedTest {
         @Override
         protected Intent getActivityIntent() {
             Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-            Intent intent = new Intent(Intent.ACTION_MAIN);
+            Intent intent = new Intent(appContext,TicketPurchaseActivity.class);
             intent.putExtra("details", "hhhhhhhhh!90");
-            intent.putExtra("un", "998353719V");
+            intent.putExtra("un", "785634432v");
             return intent;
         }
     };
@@ -107,19 +113,19 @@ public class ExampleInstrumentedTest {
         StartActivity activity = rule.getActivity();
         //validaing layout
         View viewById1 = activity.findViewById(R.id.unid_Reg);
-        assertThat(viewById1,notNullValue());
+        assertThat(viewById1,nullValue());
 
         View viewById2 = activity.findViewById(R.id.pw_Reg);
-        assertThat(viewById2,notNullValue());
+        assertThat(viewById2,nullValue());
 
         View viewById3 = activity.findViewById(R.id.email_Reg);
-        assertThat(viewById3,notNullValue());
+        assertThat(viewById3,nullValue());
 
         View viewById4 = activity.findViewById(R.id.address_Reg);
-        assertThat(viewById4,notNullValue());
+        assertThat(viewById4,nullValue());
 
         View viewById5 = activity.findViewById(R.id.cpw_Reg);
-        assertThat(viewById5,notNullValue());
+        assertThat(viewById5,nullValue());
 
         //View viewById3 = activity.findViewById(R.id.bussubmit);
 
@@ -131,6 +137,7 @@ public class ExampleInstrumentedTest {
     @Test
     public void ensureIntentDataIsDisplayed() throws Exception {
         Ticketing activity = rule2.getActivity();
+        //rule2.getActivityResult();
 
         //validaing layout
         View viewById = activity.findViewById(R.id.unid);
@@ -140,17 +147,45 @@ public class ExampleInstrumentedTest {
         assertThat(viewById,notNullValue());
         assertThat(viewById, instanceOf(TextView.class));
         TextView textView = (TextView) viewById;
-        assertThat(textView.getText().toString(),is("998353719V"));
+        assertThat(textView.getText().toString(),is("785634432v"));
 
         assertThat(viewById1,notNullValue());
         assertThat(viewById1, instanceOf(TextView.class));
         TextView textView1 = (TextView) viewById1;
-        assertThat(textView1.getText().toString(),is("shashi@gmail.com"));
+        assertThat(textView1.getText().toString(),is("cattom244@gmail.com"));
+
+       /* assertThat(viewById2,notNullValue());
+        assertThat(viewById2, instanceOf(TextView.class));
+        TextView textView2 = (TextView) viewById2;
+        assertThat(textView2.getText().toString(),is(""));*/
+
+
+
+    }
+    @Test
+    public void ensureIntentDataIsDisplayed2() throws Exception {
+        Ticketing activity = rule2.getActivity();
+        //rule2.getActivityResult();
+
+        //validaing layout
+        View viewById = activity.findViewById(R.id.unid);
+        View viewById1 = activity.findViewById(R.id.emailid);
+        View viewById2 = activity.findViewById(R.id.creditsId);
+
+        assertThat(viewById,notNullValue());
+        assertThat(viewById, instanceOf(TextView.class));
+        TextView textView = (TextView) viewById;
+        assertThat(textView.getText().toString(),is("785634432v"));
+
+       /* assertThat(viewById1,notNullValue());
+        assertThat(viewById1, instanceOf(TextView.class));
+        TextView textView1 = (TextView) viewById1;
+        assertThat(textView1.getText().toString(),is(""));
 
         assertThat(viewById2,notNullValue());
         assertThat(viewById2, instanceOf(TextView.class));
         TextView textView2 = (TextView) viewById2;
-        assertThat(textView2.getText().toString(),is("200"));
+        assertThat(textView2.getText().toString(),is(""));*/
 
 
 
@@ -160,7 +195,6 @@ public class ExampleInstrumentedTest {
     @Test
     public void ensureIntentDataIsDisplayedInTicketing2() throws Exception {
         TicketPurchaseActivity activity = rule3.getActivity();
-
         //validaing layout
         View viewById = activity.findViewById(R.id.unid);
         View viewById1 = activity.findViewById(R.id.emailid);
@@ -169,7 +203,7 @@ public class ExampleInstrumentedTest {
         assertThat(viewById,notNullValue());
         assertThat(viewById, instanceOf(TextView.class));
         TextView textView = (TextView) viewById;
-        assertThat(textView.getText().toString(),is("998353719V"));
+        assertThat(textView.getText().toString(),is("785634432v"));
 
        assertThat(viewById1,notNullValue());
         assertThat(viewById1, instanceOf(TextView.class));
