@@ -13,6 +13,8 @@ public class PassengerTest {
     //RegisterAct
     //Login
 
+    //Testing email vaidation in Register Activity
+    //Included false data and correct data
     @Test
     public void emailValidator_CorrectEmailSimple_ReturnsTrue() {
         assertTrue(EmailValidator.isValidEmail("name@email.com"));
@@ -33,18 +35,21 @@ public class PassengerTest {
         assertFalse(EmailValidator.isValidEmail(null));
     }
 
+    //Testing Online Validation
     @Test
     public void isonline_Reg() {
         RegisterAct ob=new RegisterAct();
         assertTrue(ob.isOnline());
     }
 
+    //Testing Online Validation
     @Test
     public void isonline_Login() {
         Login ob=new Login();
         assertTrue(ob.isOnline());
     }
 
+    //Testing Ticketing Validation
     @Test
     public void ticketing(){
         Ticketing ob=new Ticketing();

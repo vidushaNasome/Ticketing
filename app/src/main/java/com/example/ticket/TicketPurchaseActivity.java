@@ -18,6 +18,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+//Ticket Purchase Activity
+//Called after Ticketing
+//Ticketing TicketPurchase Issue calling one after another.
 public class TicketPurchaseActivity extends AppCompatActivity {
     TextView tp,pp,nn;
     float price;
@@ -71,6 +74,9 @@ public class TicketPurchaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        //Calling purchase button
+        //getting firebase data and updating the content
 
         purchase.setOnClickListener(new View.OnClickListener() {
             @Override

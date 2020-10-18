@@ -18,6 +18,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+//login class
+//performed by all users
 public class Login extends AppCompatActivity {
     private Session session;
 
@@ -39,6 +41,7 @@ public class Login extends AppCompatActivity {
 
         isOnline();
 
+        //calling session class
         session = new Session(getApplicationContext());
 
         un=findViewById(R.id.un_log);
@@ -50,6 +53,7 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        //button onclick
         main_nav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +72,7 @@ public class Login extends AppCompatActivity {
                 pw_1=pw.getText().toString();
 
 
+                //database
                 DatabaseReference logindf = FirebaseDatabase.getInstance().getReference().child("User").child(un_1);
 
                 logindf.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -124,6 +129,7 @@ public class Login extends AppCompatActivity {
 
     }
 
+    //checking online
     public boolean isOnline() {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMgr.getActiveNetworkInfo();

@@ -22,8 +22,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+//Registering users
 public class RegisterAct extends AppCompatActivity {
 
+    //creating variables
     private Session session;
     String username,password,cpwd,eml,name,add;
     TextView un;
@@ -38,6 +41,8 @@ public class RegisterAct extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //declaring variables
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         session = new Session(getApplicationContext());
@@ -55,6 +60,7 @@ public class RegisterAct extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        //login button
         login_nav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +69,7 @@ public class RegisterAct extends AppCompatActivity {
             }
         });
 
+    //reg button
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,6 +144,8 @@ public class RegisterAct extends AppCompatActivity {
             }
         });
     }
+
+    //This method is to check whetheer device is online or not
 
     public  boolean isOnline() {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);

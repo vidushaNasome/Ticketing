@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+//Activate Packege Class
+//Passenger can acyivate there credits from this class
 public class ActivatePackage extends AppCompatActivity {
     private Session session;
     String name;
@@ -26,6 +28,7 @@ public class ActivatePackage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activate_package);
 
+        //declaring varables
         session = new Session(getApplicationContext());
         name = session.getusename();
         username = (TextView) findViewById(R.id.unid);
@@ -36,6 +39,7 @@ public class ActivatePackage extends AppCompatActivity {
         pack_ac2= findViewById(R.id.ac2);
         pack_ac3= findViewById(R.id.ac3);
 
+        //database
         try{
         DatabaseReference displayDf = FirebaseDatabase.getInstance().getReference().child("User").child(name);
         displayDf.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -64,6 +68,7 @@ public class ActivatePackage extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        //Buttons Onclick
         pack_ac1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

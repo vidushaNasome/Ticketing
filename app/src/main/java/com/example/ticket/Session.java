@@ -7,6 +7,10 @@ import android.preference.PreferenceManager;
 
 public class Session {
 
+    //Used Singleton Design Pattern
+    //Android prebuild SharedPrefernce Object for session handling
+    //can be called in any file and get the user details.
+
     private SharedPreferences prefs;
     SharedPreferences.Editor editor;
 
@@ -26,6 +30,7 @@ public class Session {
         String usename = prefs.getString("usename","");
         return usename;
     }
+    //Logout method for cancel
     public void logout(){
         editor.clear();
         editor.commit();

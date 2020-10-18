@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+//Main Starting class
 public class StartActivity extends AppCompatActivity {
 
     Button psgL,submit;
@@ -21,6 +23,7 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
+        //Initializing Variables
         psgL=findViewById(R.id.normal_login_bt);
         submit=findViewById(R.id.bussubmit);
         name=findViewById(R.id.busname);
@@ -31,6 +34,7 @@ public class StartActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        //Button Click events
         psgL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,6 +42,8 @@ public class StartActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        //Submit Button
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -23,6 +23,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+//Confirmation of purchase ticket
+//email and voice
 public class Issue extends AppCompatActivity {
 
     TextToSpeech t1;
@@ -37,6 +39,7 @@ public class Issue extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_issue);
 
+        //declaring variables
         btn=findViewById(R.id.email_txtsp);
 
         Intent i=getIntent();
@@ -76,6 +79,7 @@ public class Issue extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        //button onclicks
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,6 +122,7 @@ public class Issue extends AppCompatActivity {
         super.onPause();
     }
 
+    //Sending email class
     private void sendmail(String useremail,Object xcon) throws MessagingException {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()

@@ -35,9 +35,11 @@ public class ExampleInstrumentedTest {
     //TicketPurchaseActivity
     //RegisterAct
 
+    //Start Activity Declaring rules
     @Rule
     public final ActivityTestRule<StartActivity> rule = new ActivityTestRule<>(StartActivity.class, true);
 
+    //Ticketing Activity Declaring rules
     @Rule
     public ActivityTestRule<Ticketing> rule2  = new  ActivityTestRule<Ticketing>(Ticketing.class)
     {
@@ -50,6 +52,7 @@ public class ExampleInstrumentedTest {
         }
     };
 
+    //PurchaseTicketActivity Declaring rules
     @Rule
     public ActivityTestRule<TicketPurchaseActivity> rule3  = new  ActivityTestRule<TicketPurchaseActivity>(TicketPurchaseActivity.class)
     {
@@ -64,9 +67,11 @@ public class ExampleInstrumentedTest {
     };
 
 
+    //Register Activity Declaring rules
     @Rule
     public final ActivityTestRule<RegisterAct> rule4 = new ActivityTestRule<>(RegisterAct.class, true);
 
+    //Checking Class Functionalities Main Test
 
     @Test
     public void useAppContext() {
@@ -79,8 +84,10 @@ public class ExampleInstrumentedTest {
     //Detecting whether fields are empty
 
     //class StartActivity
+    //Checking Class Functionalities
     @Test
     public void validateFieldsStartActivity(){
+        //validaing layout
         StartActivity activity = rule.getActivity();
         View viewById1 = activity.findViewById(R.id.busname);
         assertThat(viewById1,notNullValue());
@@ -94,9 +101,11 @@ public class ExampleInstrumentedTest {
 
     }
     //register Activity
+    //Checking Class Functionalities
     @Test
     public void validateFieldsRegisterActivity(){
         StartActivity activity = rule.getActivity();
+        //validaing layout
         View viewById1 = activity.findViewById(R.id.unid_Reg);
         assertThat(viewById1,notNullValue());
 
@@ -118,10 +127,12 @@ public class ExampleInstrumentedTest {
 
     }
     //class Ticketing
+    //Checking Class Functionalities
     @Test
     public void ensureIntentDataIsDisplayed() throws Exception {
         Ticketing activity = rule2.getActivity();
 
+        //validaing layout
         View viewById = activity.findViewById(R.id.unid);
         View viewById1 = activity.findViewById(R.id.emailid);
         View viewById2 = activity.findViewById(R.id.creditsId);
@@ -145,10 +156,12 @@ public class ExampleInstrumentedTest {
 
     }
     //class TicketPurchaseActivity
+    //Checking Class Functionalities
     @Test
     public void ensureIntentDataIsDisplayedInTicketing2() throws Exception {
         TicketPurchaseActivity activity = rule3.getActivity();
 
+        //validaing layout
         View viewById = activity.findViewById(R.id.unid);
         View viewById1 = activity.findViewById(R.id.emailid);
         View viewById2 = activity.findViewById(R.id.creditsId);
@@ -158,7 +171,7 @@ public class ExampleInstrumentedTest {
         TextView textView = (TextView) viewById;
         assertThat(textView.getText().toString(),is("998353719V"));
 
-        assertThat(viewById1,notNullValue());
+       assertThat(viewById1,notNullValue());
         assertThat(viewById1, instanceOf(TextView.class));
         TextView textView1 = (TextView) viewById1;
         assertThat(textView1.getText().toString(),is("shashi@gmail.com"));

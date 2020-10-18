@@ -24,6 +24,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+
+//Ticketing Activity
+//called after scanning qr scanner
 public class Ticketing extends AppCompatActivity {
     //private Session session;
     String name;

@@ -23,7 +23,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+//Payemnt Acitivity
+//Called to credit card payemnt
 public class Payment extends AppCompatActivity {
+    //creating variables
     CardForm cardForm;
     Button buy;
     AlertDialog.Builder alertBuilder;
@@ -37,6 +40,8 @@ public class Payment extends AppCompatActivity {
     DatabaseReference checkdata;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //declaring varibles
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
 
@@ -50,6 +55,7 @@ public class Payment extends AppCompatActivity {
         displayAm.setText("Rs."+val);
         cardForm=findViewById(R.id.card_form);
         buy=findViewById(R.id.btnBuy);
+
 
         card = new CreditCard();
         us=new User();

@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+//Main dashboard after login passengers and admins can perform actions
 public class Dashboard extends AppCompatActivity {
     Button addr,pckageAct,main;
     Session session;
@@ -16,6 +17,7 @@ public class Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        //Sessions class
         session = new Session(getApplication());
         username=session.getusename();
 
@@ -30,6 +32,7 @@ public class Dashboard extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        //Buttons Calling
         addr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
